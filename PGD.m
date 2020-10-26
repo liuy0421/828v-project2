@@ -1,10 +1,16 @@
 % Implements projected gradient descent
 % for nonnegative matrix factorization
 % with inner dimension k
-function [fro, W, H] = PGD(A, k, maxiter)
+function [fro, W, H] = PGD(A, k, maxiter, W, H)
+
     [n,m] = size(A);
-    W = rand(n,k);
-    H = rand(k,m);
+    
+    % initializes W and H if not given
+    if nargin == 3
+        W = rand(n,k);
+        H = rand(k,m);
+    end
+    
     alpha = 0.02;
     R = A-W*H;
     fro = zeros(maxiter+1,1);
