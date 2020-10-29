@@ -11,15 +11,15 @@ d = max(A(II)); % the number of words in the dictionary
 M = zeros(n,d);
 y = zeros(n,1); % y = -1 => category 1; y = 1 => category 2 
 % define M and y
-for j = 1 : n
-    i = ind(j); 
-    y(j) = A(i+1); 
-    if j<n 
-        iend = ind(j+1)-1; 
-    else
-        iend = length(A);
+for j = 1 : n % for all documents
+    i = ind(j); % find the row in A where the doc id occurs
+    y(j) = A(i+1); % the first entry in the next row is the label
+    if j<n % if we're not at the last document, 
+        iend = ind(j+1)-1; % the end is marked by the next
+    else   % otherwise
+        iend = length(A); % the end is just the length of A
     end
-    M(j,A(i+2:2:iend-1)) = 1; A(i+3:2:iend);
+    M(j,A(i+2:2:iend-1)) = A(i+3:2:iend);
 end
 i1 = find(y==-1);
 i2 = find(y==1);
