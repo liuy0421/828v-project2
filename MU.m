@@ -12,7 +12,7 @@ function [fro, W, H] = MU(A, k, maxiter, W, H)
     end
     
     fro = zeros(maxiter+1,1);
-    fro(1) = norm(A-W*H,'fro')^2;
+    fro(1) = 0.5*norm(A-W*H,'fro')^2;
     
     for i = 1:maxiter
         % update H
@@ -27,6 +27,6 @@ function [fro, W, H] = MU(A, k, maxiter, W, H)
         Wnew(isnan(Sw)) = W(isnan(Sw));
         W = Wnew;
         
-        fro(i+1) = norm(A-W*H,'fro')^2;
+        fro(i+1) = 0.5*norm(A-W*H,'fro')^2;
     end
 end
